@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="quarto-1.3.450" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+
+<title>Urban-Centric Warfare: Analyzing the Geographic Patterns of Conflict in the Ukrainian-Russian War</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<!-- htmldependencies:E3FAD763 -->
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner h1,
+      .quarto-title-block .quarto-title-banner h2,
+      .quarto-title-block .quarto-title-banner h3,
+      .quarto-title-block .quarto-title-banner h4,
+      .quarto-title-block .quarto-title-banner h5,
+      .quarto-title-block .quarto-title-banner h6
+      {
+        color: black;
+      }
+
+      .quarto-title-block .quarto-title-banner {
+        color: black;
+background: #E69F0095;
+      }
+</style>
+
+
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <div id="quarto-toc-target"></div>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+  <div class="quarto-title-banner">
+    <div class="quarto-title column-body">
+      <h1 class="title">Urban-Centric Warfare: Analyzing the Geographic Patterns of Conflict in the Ukrainian-Russian War</h1>
+            <p class="subtitle lead">DSAN 6750 / PPOL 6805: GIS for Spatial Data Science</p>
+                      </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author">Kaiyang Li </p>
+    </div>
+      <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Georgetown University
+            </p>
+        </div>
+      </div>
+
+  <div class="quarto-title-meta">
+
+        
+    
+      
+    </div>
+    
+  
+  </header>
+
+<section id="introduction" class="level2">
+<h2>Introduction</h2>
+<p>The Ukrainian-Russian war has lasted for nearly three years, causing huge and irreversible damage to world peace and economy, especially to ordinary people in both countries. However, this tug-of-war that lasted for several years also provided a verification of the strategies and tactics of large-scale military operations after World War II. Nearly 80 years have passed since World War II. Although the 40-year Cold War between the United States and the Soviet Union has promoted the development of science and technology and war theory, there is not enough practical basis to verify these advances.</p>
+<p>The most recent full-scale war between the two military powers in the world should be the Gulf War in 1991. Iraq, known as the world’s sixth military power, was defeated by the United States in just half a year. This is tantamount to the advanced integrated sea, land and air strategy and tactics of the United States at that time, achieving strategic goals through precise decapitation and destruction of enemy key cities and facilities.</p>
+<p>In the 30 years after the Gulf War, the world’s military powers are currently carrying out another military informationization reform, and this Ukrainian-Russian war can be a good verification of today’s military theory. This project will focus on whether Ukraine and Russia’s tactics are still centered around large cities.</p>
+</section>
+<section id="exploratory-data-analysis-eda" class="level2">
+<h2>Exploratory Data Analysis (EDA)</h2>
+<p>We will first have a roughly understanding about the distribution of large cities and conflict locations in Ukraine.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(units) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearthdata) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load global country boundaries</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>world <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">scale =</span> <span class="st">&quot;medium&quot;</span>, <span class="at">returnclass =</span> <span class="st">&quot;sf&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ukraine_boundary <span class="ot">&lt;-</span> world <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">&quot;Ukraine&quot;</span>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cities <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;worldcities.csv&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>conflicts <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;event_1pd_latest_2024.csv&quot;</span>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter ukraine data</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ukraine_cities <span class="ot">&lt;-</span> cities <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">&quot;Ukraine&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(city, lat, lng)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the conflict data to remove outliers</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>conflicts <span class="ot">&lt;-</span> conflicts <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(latitude <span class="sc">&gt;=</span> <span class="dv">44</span> <span class="sc">&amp;</span> latitude <span class="sc">&lt;=</span> <span class="dv">52</span>, </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>         longitude <span class="sc">&gt;=</span> <span class="dv">22</span> <span class="sc">&amp;</span> longitude <span class="sc">&lt;=</span> <span class="dv">40</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">lat =</span> latitude, <span class="at">lng =</span> longitude) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(lat, lng, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to spatial data frames</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ukraine_cities_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(ukraine_cities, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;lng&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>conflicts_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(conflicts, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;lng&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw the map of Ukraine and plot city points</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> ukraine_boundary) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> ukraine_cities_sf, <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> conflicts_sf, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Map of Ukraine with Cities&quot;</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672" /></p>
+</div>
+</div>
+<p>We can see that most of the confliction is concentrated in the east of Ukraine, which is main target of Russia force in this war.</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate distances between conflict events and cities</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>distances <span class="ot">&lt;-</span> <span class="fu">st_distance</span>(ukraine_cities_sf, conflicts_sf)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average distance for each city to all conflict points (in meters)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>avg_distances <span class="ot">&lt;-</span> <span class="fu">apply</span>(distances, <span class="dv">1</span>, mean)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert distances to kilometers</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>avg_distances_km <span class="ot">&lt;-</span> avg_distances <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add average distances to the city data for reference</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>ukraine_cities<span class="sc">$</span>avg_distance_to_conflicts_km <span class="ot">&lt;-</span> avg_distances_km</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the overall average</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>average_distance_km <span class="ot">&lt;-</span> <span class="fu">mean</span>(avg_distances_km)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Average Conflict Distance to Cities (in km):&quot;</span>, average_distance_km)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Average Conflict Distance to Cities (in km): 466.9814</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">as.data.frame</span>(ukraine_cities)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_distance_to_conflicts_km), <span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">&quot;steelblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribution of CIties Distance to Conflictions&quot;</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Minimum Distance (KM)&quot;</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672" /></p>
+</div>
+</div>
+</section>
+<section id="hypothesis-testing-regression" class="level2">
+<h2>Hypothesis Testing (Regression)</h2>
+<p>Null Hypothesis(H0): Conflict events are closer to major urban cities.</p>
+<p>Alternative Hypothesis(H1): Conflict events are not closer to major urban cities.</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform to a projected CRS (e.g., UTM Zone 37N) for accurate distance calculations</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ukraine_cities_projected <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(ukraine_cities_sf, <span class="at">crs =</span> <span class="dv">32637</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>conflicts_projected <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(conflicts_sf, <span class="at">crs =</span> <span class="dv">32637</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the buffer radius</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>buffer_radius <span class="ot">&lt;-</span> <span class="dv">50000</span>  <span class="co"># 50 km in meters</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create buffers for all cities</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>city_buffers <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(ukraine_cities_projected, <span class="at">dist =</span> buffer_radius)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a unique ID to conflict events</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>conflicts_projected<span class="sc">$</span>unique_id <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(conflicts_projected))</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform spatial join to find conflict events within city buffers</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>conflicts_in_buffers <span class="ot">&lt;-</span> <span class="fu">st_join</span>(conflicts_projected, city_buffers, <span class="at">join =</span> st_intersects)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure unique conflict events are counted</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>conflicts_in_buffers_unique <span class="ot">&lt;-</span> conflicts_in_buffers <span class="sc">%&gt;%</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(unique_id, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the unique conflict events within buffers</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>conflicts_in_buffer_count <span class="ot">&lt;-</span> <span class="fu">nrow</span>(conflicts_in_buffers_unique)</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Total number of conflict events</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>total_conflicts <span class="ot">&lt;-</span> <span class="fu">nrow</span>(conflicts_projected)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Validate counts</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Unique conflict events within city buffers:&quot;</span>, conflicts_in_buffer_count, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Unique conflict events within city buffers: 10755 </code></pre>
+</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Total conflict events:&quot;</span>, total_conflicts, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total conflict events: 10755 </code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportion of conflicts near cities</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>prop_conflicts_near_cities <span class="ot">&lt;-</span> conflicts_in_buffer_count <span class="sc">/</span> total_conflicts</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the proportion of conflicts near cities</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Proportion of conflicts near cities:&quot;</span>, prop_conflicts_near_cities, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Proportion of conflicts near cities: 1 </code></pre>
+</div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform a proportion test</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>expected_proportion <span class="ot">&lt;-</span> <span class="fl">0.50</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>prop_test_result <span class="ot">&lt;-</span> <span class="fu">prop.test</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> conflicts_in_buffer_count,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> total_conflicts,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> expected_proportion</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the statistical test result</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(prop_test_result)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    1-sample proportions test with continuity correction
+
+data:  conflicts_in_buffer_count out of total_conflicts, null probability expected_proportion
+X-squared = 10753, df = 1, p-value &lt; 2.2e-16
+alternative hypothesis: true p is not equal to 0.5
+95 percent confidence interval:
+ 0.9995549 1.0000000
+sample estimates:
+p 
+1 </code></pre>
+</div>
+</div>
+<p>We can see that the proportion that conflict is near 50km within city buffers is almost 1. These unusual results could be strong evidence of showing that Ukraine and Russian forces rallied almost all their forces around cities, or this result could be biased.</p>
+<p>We can have a look on the maps showing the conflict points and city buffers.</p>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> ukraine_cities_projected, <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_buffer</span>(ukraine_cities_projected, <span class="at">dist =</span> buffer_radius), <span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> conflicts_projected, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Conflict Points and City Buffers(&lt;50KM)&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672" /></p>
+</div>
+</div>
+<p>Since the buffer radius of 50km might not be persuasive, another test have been done using the radius of 10km.</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the buffer radius</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>buffer_radius <span class="ot">&lt;-</span> <span class="dv">10000</span>  <span class="co"># 10 km in meters</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create buffers for all cities</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>city_buffers <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(ukraine_cities_projected, <span class="at">dist =</span> buffer_radius)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a unique ID to conflict events</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>conflicts_projected<span class="sc">$</span>unique_id <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(conflicts_projected))</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform spatial join to find conflict events within city buffers</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>conflicts_in_buffers <span class="ot">&lt;-</span> <span class="fu">st_join</span>(conflicts_projected, city_buffers, <span class="at">join =</span> st_intersects)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure unique conflict events are counted</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>conflicts_in_buffers_unique <span class="ot">&lt;-</span> conflicts_in_buffers <span class="sc">%&gt;%</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(unique_id, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the unique conflict events within buffers</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>conflicts_in_buffer_count <span class="ot">&lt;-</span> <span class="fu">nrow</span>(conflicts_in_buffers_unique)</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Total number of conflict events</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>total_conflicts <span class="ot">&lt;-</span> <span class="fu">nrow</span>(conflicts_projected)</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Validate counts</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Unique conflict events within city buffers:&quot;</span>, conflicts_in_buffer_count, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Unique conflict events within city buffers: 10755 </code></pre>
+</div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Total conflict events:&quot;</span>, total_conflicts, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total conflict events: 10755 </code></pre>
+</div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportion of conflicts near cities</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>prop_conflicts_near_cities <span class="ot">&lt;-</span> conflicts_in_buffer_count <span class="sc">/</span> total_conflicts</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the proportion of conflicts near cities</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Proportion of conflicts near cities:&quot;</span>, prop_conflicts_near_cities, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Proportion of conflicts near cities: 1 </code></pre>
+</div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform a proportion test</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>expected_proportion <span class="ot">&lt;-</span> <span class="fl">0.50</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>prop_test_result <span class="ot">&lt;-</span> <span class="fu">prop.test</span>(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> conflicts_in_buffer_count,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> total_conflicts,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> expected_proportion</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the statistical test result</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(prop_test_result)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    1-sample proportions test with continuity correction
+
+data:  conflicts_in_buffer_count out of total_conflicts, null probability expected_proportion
+X-squared = 10753, df = 1, p-value &lt; 2.2e-16
+alternative hypothesis: true p is not equal to 0.5
+95 percent confidence interval:
+ 0.9995549 1.0000000
+sample estimates:
+p 
+1 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb29"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> ukraine_cities_projected, <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_buffer</span>(ukraine_cities_projected, <span class="at">dist =</span> buffer_radius), <span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> conflicts_projected, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Conflict Points and City Buffers(&lt;10KM)&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>) <span class="sc">+</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672" /></p>
+</div>
+</div>
+<p>We can still see that the proportion that conflict is near 10km within city buffers is almost 1. This means that conflictions is always around cities, which means that Ukraine and Russian forces are still targeting on cities in this war.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2>Conclusion</h2>
+<p>The results of this project provide compelling evidence that the Ukrainian-Russian war has overwhelmingly centered around urban areas. Nearly all conflict events occurred within 50 kilometers of cities, highlighting the strategic importance of urban centers in modern warfare. This pattern aligns with historical observations of military tactics, where cities often serve as key targets due to their economic, logistical, and symbolic value.</p>
+<p>The concentration of conflict near cities suggests that both Ukrainian and Russian forces have adopted strategies that prioritize control over urban areas. These findings underscore the enduring relevance of urban-centric military operations, even as warfare evolves in the era of advanced technologies and informationization. Despite advancements in military theory and tools over the past several decades, such as precision-guided strikes and decentralized operations, the fundamental significance of cities as pivotal nodes in large-scale conflicts remains unchanged.</p>
+<p>This conclusion reinforces the notion that cities are not only strategic targets but also critical theaters for achieving broader military objectives. As seen in the Gulf War and reaffirmed in this conflict, the ability to control or disrupt urban centers can decisively influence the outcome of war. Moreover, the urban focus of modern warfare has profound implications for civilians, as it amplifies the human and economic toll of conflict in densely populated areas.</p>
+<p>The Ukrainian-Russian war thus serves as a vital case study for understanding contemporary military tactics and validating post-Cold War military theories. While technological advancements have transformed how wars are fought, the geographic focus on urban centers underscores a continuity in military strategy that has persisted since World War II. Future analyses of this conflict should explore how emerging technologies, such as drones and cyberwarfare, are integrated into these urban-centric tactics and their potential to reshape the landscape of modern warfare.</p>
+</section>
+<section id="reference" class="level2">
+<h2>Reference</h2>
+<p>https://github.com/zhukovyuri/VIINA/?tab=readme-ov-file</p>
+<p>https://simplemaps.com/data/world-cities</p>
+<div id="quarto-navigation-envelope" class="hidden">
+<p><span class="hidden" data-render-id="quarto-int-sidebar-title">Urban-Centric Warfare: Analyzing the Geographic Patterns of Conflict in the Ukrainian-Russian War</span> <span class="hidden" data-render-id="quarto-int-navbar-title">Urban-Centric Warfare: Analyzing the Geographic Patterns of Conflict in the Ukrainian-Russian War</span></p>
+</div>
+<div id="quarto-meta-markdown" class="hidden">
+<p><span class="hidden" data-render-id="quarto-metatitle">Urban-Centric Warfare: Analyzing the Geographic Patterns of Conflict in the Ukrainian-Russian War</span> <span class="hidden" data-render-id="quarto-twittercardtitle">Urban-Centric Warfare: Analyzing the Geographic Patterns of Conflict in the Ukrainian-Russian War</span> <span class="hidden" data-render-id="quarto-ogcardtitle">Urban-Centric Warfare: Analyzing the Geographic Patterns of Conflict in the Ukrainian-Russian War</span> <span class="hidden" data-render-id="quarto-twittercarddesc">DSAN 6750 / PPOL 6805: GIS for Spatial Data Science</span> <span class="hidden" data-render-id="quarto-ogcardddesc">DSAN 6750 / PPOL 6805: GIS for Spatial Data Science</span></p>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id = "quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+</body>
+
+</html>
